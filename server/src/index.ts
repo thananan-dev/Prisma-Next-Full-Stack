@@ -1,12 +1,16 @@
 import express, { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import router from "./routes/routes";
+import db from "./services/prisma";
 
 const app = express();
 app.use(express.json());
-app.use("/api", router);
+app.use(router);
 
 const port = process.env.PORT ?? 8000;
-app.listen(port, () => {
-  console.log(`Server is running at  http://localhost:${port}`);
-});
+
+(async () => {
+  await db.CheckDatabaseConnection();
+  app.listen(port, () => {
+    console.log(`Server is running at  http://localhost:${port}`);
+  });
+})();

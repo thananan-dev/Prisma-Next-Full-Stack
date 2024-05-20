@@ -19,43 +19,19 @@ model User {
   username  String
   email     String  @unique
   password  String
-  address   Address @relation(fields: [addressId], references: [id])
   phone     String
   website   String
-  company   Company @relation(fields: [companyId], references: [id])
+  address   Json?
+  company   Json?
   posts     Post[]
-  addressId Int     @map("address_id")
-  companyId Int     @map("company_id")
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
+  title     String
   body      String
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int      @map("author_id")
-}
-
-model Address {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  street    String
-  suite     String
-  city      String
-  zipcode   String
-  geo       String
-  user      User[]
-}
-
-model Company {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  name        String
-  catchPhrase String
-  bs          String
-  user        User[]
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
