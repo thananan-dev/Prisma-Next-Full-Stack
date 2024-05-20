@@ -1,0 +1,22 @@
+{
+  "name": "bbl-full-stack-backend-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/thananan-dev/bbl-full-stack-assignment",
+  "author": "thananan-dev <thananan.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
