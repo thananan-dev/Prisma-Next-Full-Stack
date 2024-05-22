@@ -13,17 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id           Int    @id @default(autoincrement())
+  name         String
+  username     String
+  email        String @unique
+  password     String
+  refreshToken Token?
+}
+
 model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  username  String
-  email     String  @unique
-  password  String
-  phone     String
-  website   String
-  address   Json?
-  company   Json?
-  posts     Post[]
+  id       Int    @id @default(autoincrement())
+  name     String
+  username String
+  email    String
+  phone    String
+  website  String
+  address  Json?
+  company  Json?
+  posts    Post[]
 }
 
 model Post {
@@ -34,4 +42,13 @@ model Post {
   body      String
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
+}
+
+model Token {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  refreshToken String
+  account      Account  @relation(fields: [accountEmail], references: [email])
+  accountEmail String   @unique
 }

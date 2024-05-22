@@ -1,4 +1,4 @@
-import { object, string } from "yup";
+import { number, object, string } from "yup";
 import { regex } from "./regexp";
 
 const userValidation = () => {
@@ -6,7 +6,6 @@ const userValidation = () => {
     .shape({
       name: string().required(),
       username: string().required(),
-      password: string().required(),
       phone: string().required(),
       email: string().email().required(),
       website: string().matches(regex.website).required(),
@@ -26,10 +25,35 @@ const userValidation = () => {
         bs: string().required(),
       }),
     })
-    .default(undefined) // 👈
+    .default(undefined)
+    .required();
+};
+
+const postValidation = () => {
+  return object()
+    .shape({
+      title: string().required(),
+      body: string().required(),
+      userId: number().required(),
+    })
+    .default(undefined)
+    .required();
+};
+
+const signUpValidation = () => {
+  return object()
+    .shape({
+      name: string().required(),
+      username: string().required(),
+      password: string().required(),
+      email: string().email().required(),
+    })
+    .default(undefined)
     .required();
 };
 
 export const validation = {
   userValidation,
+  postValidation,
+  signUpValidation
 };
