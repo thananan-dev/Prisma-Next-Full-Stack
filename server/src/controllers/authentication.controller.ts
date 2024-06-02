@@ -118,7 +118,7 @@ const authenticationController = {
         },
       });
 
-      return res.status(HTTP_STATUS_CODE.OK).json({
+      return res.status(HTTP_STATUS_CODE.CREATED).json({
         message: RESPONSE_MESSAGES.ACCOUNT_CREATE_SUCCESS,
         response: createUser ?? {},
       });
